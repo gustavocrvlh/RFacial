@@ -14,8 +14,7 @@ Here are some of these packages:
   Flask:
   - Used to make the application run with a web interface
 
-The file FKapi.py will open the webcam feed that recognizes the faces
-The file IntegratedFKapi.py will open the web application to register new faces, which will be recognized by the implemented code.
+The file FKapi.py will open the webcam feed that recognizes the faces registered in the database.db file. You can register more persons via the web application. The file IntegratedFKapi.py will open the web application to register new faces, which will be recognized by the implemented code.
 
 Final result:
 
