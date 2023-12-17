@@ -2,6 +2,7 @@
 A web application that recognizes registered users in the database from a photo, through real-time facial recognition.
 
 Installing a few packages is needed in order for the application to run.
+
 Here are some of these packages:
   Face Recognition:
   - Used to diferenciate the faces, so trainning a AI was not needed.
