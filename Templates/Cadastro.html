@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_cadastro.css') }}">
+</head>
+<body>
+    <h1>Cadastro de Usuários</h1>
+
+    <form action="/process_cadastro" method="POST" enctype="multipart/form-data" id="userForm">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" required><br>
+
+        <label for="numero">Número:</label>
+        <input type="text" name="numero" id="numero" required><br>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" id="cpf" required><br>
+
+        <label for="imagem">Inserir imagem:</label>
+        <input type="file" name="imagem" id="imagem"><br>
+
+
+        <input type="submit" value="Cadastrar">
+
+
+    </form>
+
+    <video id="webcam" autoplay></video>
+    <canvas id="imagemCapturada" style="display: none;"></canvas>
+
+    <script>
+        let streaming = false;
+
+        document.getElementById('ligarWebcam').addEventListener('click', ligarWebcam);
+        document.getElementById('capturar').addEventListener('click', capturarImagem);
+
+        function ligarWebcam() {
+            const video = document.getElementById('webcam');
+            const capturarBotao = document.getElementById('capturar');
+            const ligarBotao = document.getElementById('ligarWebcam');
+
+            if (!streaming) {
+                const constraints = {
+                    video: true,
+                };
+
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then((stream) => {
+                        video.srcObject = stream;
+                        streaming = true;
+                        ligarBotao.style.display = 'none';
+                        capturarBotao.style.display = 'block';
+                        console.log('Câmera do dispositivo acessada com sucesso.');
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao acessar a câmera do dispositivo:', error);
+                    });
+            }
+        }
+
+        function capturarImagem() {
+            const video = document.getElementById('webcam');
+            const canvas = document.getElementById('imagemCapturada');
+            const capturarBotao = document.getElementById('capturar');
+            const cadastrarButton = document.getElementById('cadastrarButton');
+            const imagemSalvaMessage = document.getElementById('imagemSalvaMessage');
+            const previewImagem = document.getElementById('previewImagem');
+
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const imagemCapturada = canvas.toDataURL('image/jpeg');
+            const inputImagem = document.getElementById('imagem');
+            inputImagem.value = imagemCapturada;
+
+            // Exiba a prévia da imagem
+            previewImagem.src = imagemCapturada;
+            previewImagem.style.display = 'block';
+
+            imagemSalvaMessage.style.display = 'block';
+            capturarBotao.style.display = 'none';
+
+            cadastrarButton.removeAttribute('disabled');
+
+            const tracks = video.srcObject.getTracks();
+            tracks.forEach((track) => track.stop());
+
+            video.srcObject = null;
+        }
+    </script>
+</body>
+</html>
