@@ -14,14 +14,18 @@ Here are some of these packages:
   Flask:
   - Used to make the application run with a web interface
 
-The file FKapi.py will open the webcam feed that recognizes the faces registered in the database.db file. You can register more persons via the web application. The file IntegratedFKapi.py will open the web application to register new faces, which will be recognized by the implemented code.
+The file FKapi.py will open the webcam feed that recognizes the faces registered in the database.db file. You can register more persons via the web application. This application is opened by the IntegratedFKapi.py file.
 
 Final result:
 
 ![image](https://github.com/gustavocrvlh/RFacial/assets/85922093/80778cfb-b3c2-40a2-9c91-63146f8da7b4)
 
+Use the rout "/mostrar" to open this page
+
 
 ![image](https://github.com/gustavocrvlh/RFacial/assets/85922093/4d77c039-0c81-4362-ae81-f1db11d80763)
+
+Terminal
 
 
 
