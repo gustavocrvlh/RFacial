@@ -1,5 +1,5 @@
 # RFacial
-##(currently working on a standalone app with this function)
+## (currently working on a standalone app with this function)
 
 A web application that recognizes registered users in the database from a photo, through real-time facial recognition.
 
